@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Periféricos High Performance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-body: #0b0f17;
+            --bg-card: #161f2e;
+            --bg-input: #0f172a;
+            --accent: #00f2fe;
+            --accent-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            --accent-hover: linear-gradient(135deg, #0072ff 0%, #00c6ff 100%);
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --border: #233148;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        header {
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-top: 6px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 22px;
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        .vitrine {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .card-periferico {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .card-periferico:hover {
+            transform: translateY(-5px);
+            border-color: #00c6ff;
+            box-shadow: 0 10px 25px -5px rgba(0, 198, 255, 0.2);
+        }
+
+        .card-periferico img {
+            width: 100%;
+            height: 160px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            background: #0f172a;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .tag {
+            align-self: flex-start;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .card-periferico h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .preco {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .btn-comprar {
+            background: var(--accent-gradient);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            width: 100%;
+        }
+
+        .btn-comprar:hover {
+            opacity: 0.9;
+        }
+
+        .painel-inferior {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 850px) {
+            .painel-inferior {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 25px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        form input:focus {
+            border-color: #00c6ff;
+        }
+
+        .btn-cadastrar {
+            width: 100%;
+            padding: 12px;
+            background: #233148;
+            color: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-cadastrar:hover {
+            background: #00c6ff;
+            color: #000;
+        }
+
+        #mensagem {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .lista-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .btn-atualizar {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .btn-atualizar:hover {
+            color: #fff;
+            border-color: #00c6ff;
+        }
+
+        #clientes {
+            max-height: 250px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .cliente-item {
+            background: var(--bg-input);
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+
+        .cliente-nome {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .cliente-detalhe {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <header>
+        <h1>⚡ GuiTech</h1>
+        <p>Periféricos de alta performance para o seu setup</p>
+    </header>
+
+    <section>
+        <h2 class="section-title">Periféricos em Destaque</h2>
+        <div class="vitrine">
+            
+            <div class="card-periferico">
+                <div>
+                    <span class="tag">Teclado</span>
+                    <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=300&q=80" alt="Teclado Mecânico">
+                    <h3>Teclado Mecânico RGB Switch Blue</h3>
+                </div>
+                <div>
+                    <div class="preco">R$ 289,90</div>
+                    <button class="btn-comprar" onclick="alert('Item adicionado ao carrinho!')">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+
+            <div class="card-periferico">
+                <div>
+                    <span class="tag">Mouse</span>
+                    <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=300&q=80" alt="Mouse Gamer">
+                    <h3>Mouse Gamer 16.000 DPI Ultra Leve</h3>
+                </div>
+                <div>
+                    <div class="preco">R$ 149,90</div>
+                    <button class="btn-comprar" onclick="alert('Item adicionado ao carrinho!')">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+
+            <div class="card-periferico">
+                <div>
+                    <span class="tag">Áudio</span>
+                    <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=300&q=80" alt="Headset Gamer">
+                    <h3>Headset Surround 7.1 Noise Cancelling</h3>
+                </div>
+                <div>
+                    <div class="preco">R$ 329,90</div>
+                    <button class="btn-comprar" onclick="alert('Item adicionado ao carrinho!')">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+
+            <div class="card-periferico">
+                <div>
+                    <span class="tag">Vídeo</span>
+                    <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=300&q=80" alt="Monitor Gamer">
+                    <h3>Monitor Gamer 144Hz 1ms IPS 24"</h3>
+                </div>
+                <div>
+                    <div class="preco">R$ 1.199,90</div>
+                    <button class="btn-comprar" onclick="alert('Item adicionado ao carrinho!')">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PAINEL INFERIOR: CADASTRO + LISTA DISCRETA -->
+    <div class="painel-inferior">
+        
+        <!-- Cadastro de Cliente -->
+        <form id="formCliente" class="box">
+            <h2 class="section-title">Cadastrar Cliente</h2>
+
+            <input name="nome" placeholder="Nome completo" required>
+            <input name="email" type="email" placeholder="E-mail" required>
+            <input name="telefone" placeholder="Telefone">
+            <input name="endereco" placeholder="Endereço">
+
+            <button type="submit" class="btn-cadastrar">Cadastrar Cliente</button>
+            <p id="mensagem" role="status"></p>
+        </form>
+
+        <!-- Lista de Clientes (Discreta e Compacta) -->
+        <section class="box">
+            <div class="lista-header">
+                <h2 class="section-title" style="margin-bottom:0">Clientes</h2>
+                <button type="button" id="atualizar" class="btn-atualizar">🔄 Atualizar</button>
+            </div>
+
+            <div id="clientes">Carregando...</div>
+        </section>
+
+    </div>
+</div>
+
+<script>
+    const API = "http://localhost/lojati/back/index.php";
+    const formulario = document.getElementById("formCliente");
+    const mensagem = document.getElementById("mensagem");
+    const lista = document.getElementById("clientes");
+
+    async function listarClientes() {
+        lista.textContent = "Carregando...";
+
+        try {
+            const resposta = await fetch(API + "?rota=clientes");
+            const dados = await resposta.json();
+
+            if (!resposta.ok || !Array.isArray(dados)) {
+                throw new Error(dados.erro || "Erro ao carregar.");
+            }
+
+            lista.innerHTML = "";
+
+            if (dados.length === 0) {
+                lista.textContent = "Nenhum cliente cadastrado.";
+                return;
+            }
+
+            dados.forEach(cliente => {
+                const item = document.createElement("div");
+                item.className = "cliente-item";
+
+                item.innerHTML = `
+                    <div class="cliente-nome">${cliente.Nome}</div>
+                    <div class="cliente-detalhe">${cliente.Email} ${cliente.Telefone ? '• ' + cliente.Telefone : ''}</div>
+                `;
+
+                lista.appendChild(item);
+            });
+        } catch (erro) {
+            lista.textContent = "Erro ao carregar: " + erro.message;
+        }
+    }
+
+    formulario.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const campos = new FormData(formulario);
+
+        const cliente = {
+            Nome: campos.get("nome").trim(),
+            Email: campos.get("email").trim(),
+            Telefone: campos.get("telefone").trim(),
+            Endereco: campos.get("endereco").trim()
+        };
+
+        mensagem.style.color = "var(--text-secondary)";
+        mensagem.textContent = "Cadastrando...";
+
+        try {
+            const resposta = await fetch(API + "?rota=clientes/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(cliente)
+            });
+
+            const resultado = await resposta.json();
+
+            if (!resposta.ok) {
+                mensagem.style.color = "#ff4d4d";
+                mensagem.textContent = resultado.erro || "Erro ao cadastrar cliente.";
+                return;
+            }
+
+            mensagem.style.color = "#00f2fe";
+            mensagem.textContent = resultado.mensagem || "Cliente cadastrado!";
+
+            formulario.reset();
+            await listarClientes();
+
+        } catch (erro) {
+            mensagem.style.color = "#ff4d4d";
+            mensagem.textContent = "Erro: " + erro.message;
+            console.error(erro);
+        }
+    });
+
+    document.getElementById("atualizar").addEventListener("click", listarClientes);
+
+    listarClientes();
+</script>
+</body>
+</html>
